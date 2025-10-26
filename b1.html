@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -11,20 +13,17 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         body {
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             color: white;
             min-height: 100vh;
             padding: 20px;
         }
-        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        
         header {
             text-align: center;
             margin-bottom: 30px;
@@ -33,13 +32,11 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
         h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-        
         .status {
             display: flex;
             justify-content: center;
@@ -47,7 +44,6 @@
             gap: 10px;
             margin: 15px 0;
         }
-        
         .status-indicator {
             width: 15px;
             height: 15px;
@@ -55,17 +51,14 @@
             background-color: #4CAF50;
             animation: pulse 2s infinite;
         }
-        
         .status.offline .status-indicator {
             background-color: #f44336;
         }
-        
         @keyframes pulse {
             0% { opacity: 1; }
             50% { opacity: 0.5; }
             100% { opacity: 1; }
         }
-        
         .video-container {
             position: relative;
             width: 100%;
@@ -76,13 +69,11 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-        
         video {
             width: 100%;
             height: auto;
             display: block;
         }
-        
         .loading {
             position: absolute;
             top: 0;
@@ -96,7 +87,6 @@
             background: rgba(0, 0, 0, 0.7);
             z-index: 10;
         }
-        
         .spinner {
             width: 50px;
             height: 50px;
@@ -106,18 +96,15 @@
             animation: spin 1s ease-in-out infinite;
             margin-bottom: 15px;
         }
-        
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        
         .controls {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
         }
-        
         button {
             padding: 10px 20px;
             background: rgba(255, 255, 255, 0.2);
@@ -128,12 +115,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
         button:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
         }
-        
         .reload-info {
             text-align: center;
             margin-top: 20px;
@@ -141,13 +126,11 @@
             background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
         }
-        
         .counter {
             font-size: 1.2rem;
             font-weight: bold;
             color: #fdbb2d;
         }
-        
         footer {
             text-align: center;
             margin-top: 30px;
@@ -155,20 +138,10 @@
             font-size: 0.9rem;
             opacity: 0.8;
         }
-        
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .controls {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            button {
-                width: 80%;
-            }
+            h1 { font-size: 1.8rem; }
+            .controls { flex-direction: column; align-items: center; }
+            button { width: 80%; }
         }
     </style>
 </head>
@@ -178,17 +151,16 @@
             <h1>البث المباشر</h1>
             <div class="status" id="status">
                 <div class="status-indicator"></div>
-                <span id="status-text">جاري التشغيل</span>
+                <span id="statusText">جاري التشغيل</span>
             </div>
         </header>
         
         <main>
             <div class="video-container">
-                <video id="videoPlayer" controls muted>
-                    <source src="http://141.98.115.53/beINSPORTSSD2/tracks-v1a1/mono.ts.m3u8?token=Time-Match"
-
-
- type="application/x-mpegURL">
+                <video id="videoPlayer" controls muted autoplay playsinline>
+                    <!-- ✅ تم تمرير الرابط عبر proxy آمن -->
+                    <source src="https://api.allorigins.win/raw?url=http://141.98.115.53/beINSPORTSSD2/tracks-v1a1/mono.ts.m3u8?token=Time-Match" 
+                            type="application/x-mpegURL">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
                 <div class="loading" id="loading">
@@ -209,7 +181,7 @@
         </main>
         
         <footer>
-            <p>تم التطوير بواسطه  784669594</p>
+            <p>تم التطوير بواسطة 784669594</p>
         </footer>
     </div>
 
@@ -222,96 +194,66 @@
             const reloadBtn = document.getElementById('reloadBtn');
             const toggleSound = document.getElementById('toggleSound');
             const countdown = document.getElementById('countdown');
-            
-            let reloadTimeout;
+
             let countdownInterval;
-            let reloadTime = 10; // الوقت بالثواني قبل إعادة التحميل التلقائي
-            
-            // إخفاء شاشة التحمير عند بدء التشغيل
+            let reloadTime = 10; // الثواني قبل إعادة التحميل
+
             video.addEventListener('loadeddata', function() {
                 loading.style.display = 'none';
                 statusText.textContent = 'جاري التشغيل';
                 clearCountdown();
             });
-            
-            // عند حدوث خطأ في الفيديو
-            video.addEventListener('error', function() {
-                handleStreamError();
-            });
-            
-            // عند توقف البث
+            video.addEventListener('error', handleStreamError);
             video.addEventListener('waiting', function() {
                 loading.style.display = 'flex';
                 statusText.textContent = 'جاري إعادة الاتصال...';
             });
-            
-            // عند استئناف البث
             video.addEventListener('playing', function() {
                 loading.style.display = 'none';
                 statusText.textContent = 'جاري التشغيل';
                 clearCountdown();
             });
-            
-            // عند انتهاء البث
-            video.addEventListener('ended', function() {
-                handleStreamError();
-            });
-            
-            // زر إعادة التحميل اليدوي
-            reloadBtn.addEventListener('click', function() {
-                reloadPage();
-            });
-            
-            // زر التحكم في الصوت
+            video.addEventListener('ended', handleStreamError);
+
+            reloadBtn.addEventListener('click', reloadPage);
             toggleSound.addEventListener('click', function() {
                 video.muted = !video.muted;
                 toggleSound.textContent = video.muted ? 'تشغيل الصوت' : 'كتم الصوت';
             });
-            
-            // معالجة أخطاء البث
+
             function handleStreamError() {
                 status.classList.add('offline');
                 statusText.textContent = 'انقطع البث - جاري إعادة التحميل';
                 loading.style.display = 'flex';
                 loading.querySelector('p').textContent = 'انقطع البث - جاري إعادة التحميل';
-                
-                // بدء العد التنازلي لإعادة التحميل
                 startCountdown();
             }
-            
-            // بدء العد التنازلي
+
             function startCountdown() {
                 let timeLeft = reloadTime;
                 countdown.textContent = timeLeft;
-                
                 countdownInterval = setInterval(function() {
                     timeLeft--;
                     countdown.textContent = timeLeft;
-                    
-                    if (timeLeft <= 0) {
-                        reloadPage();
-                    }
+                    if (timeLeft <= 0) reloadPage();
                 }, 1000);
             }
-            
-            // إيقاف العد التنازلي
+
             function clearCountdown() {
                 if (countdownInterval) {
                     clearInterval(countdownInterval);
                     countdown.textContent = '--';
                 }
             }
-            
-            // إعادة تحميل الصفحة
+
             function reloadPage() {
                 window.location.reload();
             }
-            
-            // محاولة تشغيل الفيديو تلقائيًا
-            video.play().catch(function(error) {
-                console.log('التشغيل التلقائي غير مسموح:', error);
-            });
+
+            video.play().catch(error => console.log('التشغيل التلقائي غير مسموح:', error));
         });
     </script>
 </body>
 </html>
+
+
