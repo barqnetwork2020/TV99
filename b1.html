@@ -1,259 +1,164 @@
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بث مباشر - إعادة تحميل تلقائي</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: white;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .status {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        .status-indicator {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background-color: #4CAF50;
-            animation: pulse 2s infinite;
-        }
-        .status.offline .status-indicator {
-            background-color: #f44336;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            background: #000;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-        video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .loading {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 10;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-bottom: 15px;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-        .reload-info {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-        }
-        .counter {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #fdbb2d;
-        }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
-            .controls { flex-direction: column; align-items: center; }
-            button { width: 80%; }
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>بث مباشر - تجربة hls.js + proxy</title>
+<style>
+  body{font-family:Segoe UI, Tahoma, sans-serif;background:#111;color:#fff;padding:18px;min-height:100vh}
+  .container{max-width:900px;margin:0 auto}
+  .video-box{background:#000;border-radius:8px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+  video{width:100%;height:auto;display:block}
+  .info{margin-top:12px;background:rgba(255,255,255,0.03);padding:12px;border-radius:8px}
+  .error{color:#ffb3b3}
+  button{padding:8px 12px;margin:6px;border-radius:6px;border:0;background:#2b6cff;color:#fff;cursor:pointer}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>البث المباشر</h1>
-            <div class="status" id="status">
-                <div class="status-indicator"></div>
-                <span id="statusText">جاري التشغيل</span>
-            </div>
-        </header>
-        
-        <main>
-            <div class="video-container">
-                <video id="videoPlayer" controls muted autoplay playsinline>
-                    <!-- ✅ تم تمرير الرابط عبر proxy آمن -->
-                    <source src="https://api.allorigins.win/raw?url=http://141.98.115.53/beINSPORTSSD2/tracks-v1a1/mono.ts.m3u8?token=Time-Match" 
-                            type="application/x-mpegURL">
-                    متصفحك لا يدعم تشغيل الفيديو.
-                </video>
-                <div class="loading" id="loading">
-                    <div class="spinner"></div>
-                    <p>جاري تحميل البث...</p>
-                </div>
-            </div>
-            
-            <div class="controls">
-                <button id="reloadBtn">إعادة التحميل الآن</button>
-                <button id="toggleSound">تشغيل/كتم الصوت</button>
-            </div>
-            
-            <div class="reload-info">
-                <p>سيتم إعادة تحميل الصفحة تلقائيًا عند انقطاع البث</p>
-                <p>إعادة التحميل التالية خلال: <span class="counter" id="countdown">--</span> ثانية</p>
-            </div>
-        </main>
-        
-        <footer>
-            <p>تم التطوير بواسطة 784669594</p>
-        </footer>
+<div class="container">
+  <h1>اختبار بث — hls.js + proxy</h1>
+  <div class="video-box">
+    <video id="video" controls playsinline></video>
+  </div>
+
+  <div class="info" id="info">
+    <p>حالة: <span id="status">جرب التشغيل...</span></p>
+    <p class="error" id="err"></p>
+    <div style="margin-top:8px;">
+      <button id="tryDirect">حاول تشغيل مباشر</button>
+      <button id="tryProxy">حاول تشغيل عبر proxy</button>
+      <button id="openConsole">فتح تلميحات (تفحص الكونسول)</button>
     </div>
+    <p style="margin-top:8px;font-size:90%">ملاحظة: افتح أدوات المطور (F12) > Console لمشاهدة الأخطاء التفصيلية.</p>
+  </div>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('videoPlayer');
-            const loading = document.getElementById('loading');
-            const status = document.getElementById('status');
-            const statusText = document.getElementById('statusText');
-            const reloadBtn = document.getElementById('reloadBtn');
-            const toggleSound = document.getElementById('toggleSound');
-            const countdown = document.getElementById('countdown');
+<!-- hls.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.8/dist/hls.min.js"></script>
+<script>
+(() => {
+  const video = document.getElementById('video');
+  const statusEl = document.getElementById('status');
+  const errEl = document.getElementById('err');
+  const tryDirectBtn = document.getElementById('tryDirect');
+  const tryProxyBtn = document.getElementById('tryProxy');
+  const openConsoleBtn = document.getElementById('openConsole');
 
-            let countdownInterval;
-            let reloadTime = 10; // الثواني قبل إعادة التحميل
+  // ضع هنا رابط الـ m3u8 الأصلي (HTTP). لا تغيّر باقي الكود
+  const ORIGINAL_URL = 'http://141.98.115.53/beINSPORTSSD2/tracks-v1a1/mono.ts.m3u8?token=Time-Match';
 
-            video.addEventListener('loadeddata', function() {
-                loading.style.display = 'none';
-                statusText.textContent = 'جاري التشغيل';
-                clearCountdown();
-            });
-            video.addEventListener('error', handleStreamError);
-            video.addEventListener('waiting', function() {
-                loading.style.display = 'flex';
-                statusText.textContent = 'جاري إعادة الاتصال...';
-            });
-            video.addEventListener('playing', function() {
-                loading.style.display = 'none';
-                statusText.textContent = 'جاري التشغيل';
-                clearCountdown();
-            });
-            video.addEventListener('ended', handleStreamError);
+  // proxies تجريبية (قد تعمل أو لا حسب قدرة البروكسي على stream وCORS)
+  const PROXIES = [
+    // تجربة: corsproxy.io أو corsproxy.github أو proxies عامة
+    // ملاحظة: بعض هذه الخدمات تقطع البث الحي — إن فشل، راجع الحلول الموضّحة تحت الكود
+    url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+    url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    url => `https://thingproxy.freeboard.io/fetch/${url}`
+  ];
 
-            reloadBtn.addEventListener('click', reloadPage);
-            toggleSound.addEventListener('click', function() {
-                video.muted = !video.muted;
-                toggleSound.textContent = video.muted ? 'تشغيل الصوت' : 'كتم الصوت';
-            });
+  function logStatus(s){ statusEl.textContent = s; console.log('[STATUS]', s); }
+  function logError(e){
+    errEl.textContent = typeof e === 'string' ? e : (e && e.message) ? e.message : JSON.stringify(e);
+    console.error('[ERROR]', e);
+  }
 
-            function handleStreamError() {
-                status.classList.add('offline');
-                statusText.textContent = 'انقطع البث - جاري إعادة التحميل';
-                loading.style.display = 'flex';
-                loading.querySelector('p').textContent = 'انقطع البث - جاري إعادة التحميل';
-                startCountdown();
-            }
+  // محاولة تشغيل بمصدر مُعطى (يشمل hls.js للتوافق)
+  function playWith(url){
+    errEl.textContent = '';
+    logStatus('محاولة التشغيل: ' + url);
+    // إذا كان المتصفح يدعم HLS natif (Safari iOS/macOS)
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = url;
+      video.load();
+      video.play().catch(e => logError(e));
+      return Promise.resolve();
+    }
 
-            function startCountdown() {
-                let timeLeft = reloadTime;
-                countdown.textContent = timeLeft;
-                countdownInterval = setInterval(function() {
-                    timeLeft--;
-                    countdown.textContent = timeLeft;
-                    if (timeLeft <= 0) reloadPage();
-                }, 1000);
-            }
-
-            function clearCountdown() {
-                if (countdownInterval) {
-                    clearInterval(countdownInterval);
-                    countdown.textContent = '--';
-                }
-            }
-
-            function reloadPage() {
-                window.location.reload();
-            }
-
-            video.play().catch(error => console.log('التشغيل التلقائي غير مسموح:', error));
+    // غير ذلك: استخدم hls.js
+    if (window.Hls && Hls.isSupported()) {
+      // تدمير أي instance سابق
+      if (window._hlsInstance) {
+        try { window._hlsInstance.destroy(); } catch(e){ /* ignore */ }
+        window._hlsInstance = null;
+      }
+      const hls = new Hls({
+        // إعدادات مفيدة للبث الحي
+        maxBufferLength: 30,
+        liveSyncDuration: 3,
+        enableWorker: true
+      });
+      window._hlsInstance = hls;
+      hls.on(Hls.Events.ERROR, function(event, data){
+        console.warn('hls error', event, data);
+        if (data && data.fatal) {
+          logError('خطأ فادح في hls.js — ' + (data.details || data.type));
+          // محاولة إعادة التحميل التلقائي
+          try { hls.destroy(); } catch(e){}
+        }
+      });
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MEDIA_ATTACHED, function(){
+        hls.loadSource(url);
+        hls.on(Hls.Events.MANIFEST_PARSED, function(){
+          video.play().catch(e => logError(e));
+          logStatus('قيد التشغيل (hls.js)');
         });
-    </script>
+      });
+      return Promise.resolve();
+    } else {
+      const msg = 'المتصفح لا يدعم HLS ومكتبة hls.js غير متاحة';
+      logError(msg);
+      return Promise.reject(new Error(msg));
+    }
+  }
+
+  // زر: تجربة التشغيل المباشر (قد يفشل بسبب mixed content أو CORS)
+  tryDirectBtn.addEventListener('click', () => {
+    // لو الصفحة على HTTPS و ORIGINAL_URL على http -> Mixed content سيمنع المتصفح
+    if (location.protocol === 'https:' && ORIGINAL_URL.startsWith('http:')) {
+      logError('مصدر غير آمن (HTTP) بينما الصفحة على HTTPS — هذا سَيُمنع تلقائياً. حاول استخدام proxy أو جعل المصدر يدعم HTTPS.');
+      return;
+    }
+    playWith(ORIGINAL_URL).catch(logError);
+  });
+
+  // زر: تجربة عبر البروكسيات المُدرجة (يحاول الواحد تلو الآخر حتى ينجح)
+  tryProxyBtn.addEventListener('click', async () => {
+    for (let i=0;i<PROXIES.length;i++){
+      const pUrl = PROXIES[i](ORIGINAL_URL);
+      logStatus(`تجربة proxy ${i+1}: ${pUrl}`);
+      try {
+        await playWith(pUrl);
+        // إذا لم يظهر خطأ بعد 6 ثواني اعتبرها ناجحة
+        await new Promise((res,rej)=>setTimeout(res,6000));
+        if (!errEl.textContent) {
+          logStatus('نجح proxy رقم ' + (i+1));
+          return;
+        }
+      } catch(e){
+        logError(e);
+        // تابع للبروكسي التالي
+      }
+    }
+    logError('فشل كل proxies التجريبية — راجع الحلول أدناه.');
+  });
+
+  openConsoleBtn.addEventListener('click', () => {
+    alert('افتح أدوات المطور (F12 أو Ctrl+Shift+I) ثم انتقل إلى تبويب Console لعرض تفاصيل الأخطاء.');
+  });
+
+  // محاولة تلقائية سريعة عند التحميل: أولاً تحقق mixed content وإلا جرب proxy
+  window.addEventListener('load', () => {
+    // لو الصفحة HTTPS و المصدر HTTP -> ننتقل مباشرةً إلى proxy
+    if (location.protocol === 'https:' && ORIGINAL_URL.startsWith('http:')) {
+      logStatus('الصفحة على HTTPS والمصدر على HTTP — سنجرب proxies الآن.');
+      tryProxyBtn.click();
+    } else {
+      // جرب مباشر أولاً
+      tryDirectBtn.click();
+    }
+  });
+})();
+</script>
 </body>
 </html>
-
-
