@@ -68,6 +68,14 @@
   },
 
 
+
+{
+    "name": "●●[  قنوات الاخبار]●●",
+    "url": ""
+  },
+
+
+
 {
     "name": "الحدث",
     "url": "https://live.alarabiya.net/alarabiapublish/alhadath.smil/alarabiapublish/alhadath_240p/chunks.m3u8"
@@ -75,10 +83,27 @@
 
 
 
+
+{
+    "name": "العربيه BBC",
+    "url": "http://176.123.9.60:8080/Ugeen_Dfitnd/yiffHS/1005"
+  },
+
+
 {
     "name": "العربيه",
     "url": "https://live.alarabiya.net/alarabiapublish/alarabiya.smil/alarabiapublish/alarabiya_240p/chunks.m3u8"
   },
+
+
+
+
+
+{
+    "name": "الجزيرة",
+    "url": "http://176.123.9.60:8080/Ugeen_Dfitnd/yiffHS/998"
+  },
+
 
 
 
