@@ -131,9 +131,19 @@
 {
     "name": "اليمن اليوم",
     "url": "https://video.yementdy.tv/hls/yementoday_src.m3u8"
+  },
+
+
+{
+    "name": "●●[قنوات منوعة]●●",
+    "url": ""
+  },
+
+
+{
+    "name": "ناشيونال جيوغرافيك",
+    "url": "https://www.web24iptv.online/hls_lbn?url=https%3A%2F%2Fsamaflix.com%3A12103%2Fchannel43%2Ftracks-v1a1%2Fmono.m3u8"
   }
-
-
 
 
 ]
