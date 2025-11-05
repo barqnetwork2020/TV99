@@ -114,13 +114,24 @@
 {
     "name": "العربيه",
     "url": "https://live.alarabiya.net/alarabiapublish/alarabiya.smil/alarabiapublish/alarabiya_240p/chunks.m3u8"
+  },
+
+
+{
+    "name": "●●[قنوات اليمن]●●",
+    "url": ""
+  },
+
+
+{
+    "name": "شباب اليمن",
+    "url": "https://starmenajo.com/hls/yemenshabab/index.m3u8"
+  },
+
+{
+    "name": "اليمن اليوم",
+    "url": "https://video.yementdy.tv/hls/yementoday_src.m3u8"
   }
-
-
-
-
-
-
 
 
 
