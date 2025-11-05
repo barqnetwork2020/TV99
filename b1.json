@@ -143,7 +143,13 @@
 {
     "name":  "ناشيونال جيوغرافيك",
     "url": "https://streamer1.qna.org.qa/148133202_live/148133202_63.sdp/chunklist_w1512706022.m3u8"
+  },
+
+{
+    "name":  "MBC 1",
+    "url": "https://shls-live-ak.akamaized.net/out/v1/0965e4d7deae49179172426cbfb3bc5e/index_7.m3u8"
   }
+
 
 
 ]
