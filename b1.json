@@ -2,114 +2,107 @@
 
 
  
-{
-    "name": "●●[قنوات الرياضية]●●",
-    "url": ""
-  },
+
 
 
   {
-    "name": "Bein Sports 1 [☆☆☆☆☆]",
+    "name": "Bein Sports 1 ",
     "url": "http://135.125.109.73:9000/beinsport1_.m3u8"
   },
 
 
  {
-    "name": "Bein Sports 2 [☆☆☆☆☆]",
+    "name": "Bein Sports 2 ",
     "url": "http://135.125.109.73:9000/beinsport2_.m3u8"
   },
 
 
 
  {
-    "name": "Bein Sports 3 [☆☆☆☆☆]",
+    "name": "Bein Sports 3 ",
     "url": "http://135.125.109.73:9000/beinsport3_.m3u8"
   },
 
 
 
 {
-    "name": "Bein Sports 4 [☆☆☆☆☆]",
+    "name": "Bein Sports 4 ",
     "url": "http://135.125.109.73:9000/beinsport4_.m3u8"
   },
 
 
 {
-    "name": "Bein Sports 5 [☆☆☆☆☆]",
+    "name": "Bein Sports 5 ",
     "url": "http://135.125.109.73:9000/beinsport5_.m3u8"
   },
 
 
 
 {
-    "name": "Bein Sports 6 [☆☆☆☆☆]",
+    "name": "Bein Sports 6 ",
     "url": "http://135.125.109.73:9000/beinsport6_.m3u8"
   },
 
 
 
 {
-    "name": "Bein Sports 7 [☆☆☆☆☆]",
+    "name": "Bein Sports 7 ",
     "url": "http://135.125.109.73:9000/beinsport7_.m3u8"
   },
 
 
 {
-    "name": "Bein Sports 8 [☆☆☆☆☆]",
+    "name": "Bein Sports 8 ",
     "url": "http://135.125.109.73:9000/beinsport8_.m3u8"
   },
 
 
 
 {
-    "name": "Bein Sports 9 [☆☆☆☆☆]",
+    "name": "Bein Sports 9 ",
     "url": "http://135.125.109.73:9000/beinsport9_.m3u8"
   },
 
 
 
 {
-    "name": " 1 ثمانية [☆☆☆☆]",
+    "name": " 1 ثمانية ",
     "url":"http://sportook.space:2000/thman-2/tracks-v1a1/mono.m3u8"
   },
 
 
 {
-    "name": " 2 ثمانية [☆☆☆☆]",
+    "name": " 2 ثمانية",
     "url": "https://www.go-web.space/live/stream1654.m3u8"
   },
 
 {
-    "name": " 3 ثمانية [☆☆☆☆]",
+    "name": " 3 ثمانية ",
     "url": "http://ugeen.live:8080/Ugeen_MqecLk/gYugSv/4239"
   },
 
 
 {
-    "name": " 1 الكاس [☆☆☆]",
+    "name": " 1 الكاس ",
     "url": "http://176.123.9.60:8080/Ugeen_MqecLk/gYugSv/1461"
   },
 
 {
-    "name": " 2 الكاس [☆☆☆]",
+    "name": " 2 الكاس ",
     "url": "http://176.123.9.60:8080/Ugeen_MqecLk/gYugSv/1462"
   },
 
 {
-    "name": " 3 الكاس [☆☆☆]",
+    "name": " 3 الكاس ",
     "url": "http://176.123.9.60:8080/Ugeen_MqecLk/gYugSv/1463"
   },
 
 {
-    "name": " 4 الكاس [☆☆☆]",
+    "name": " 4 الكاس ",
     "url": "http://176.123.9.60:8080/Ugeen_MqecLk/gYugSv/1464"
   },
 
 
-{
-    "name": "●●○○●●[  قنوات الاخبار ]●●○○●●",
-    "url": ""
-  },
 
 
 
@@ -137,10 +130,7 @@
   },
 
 
-{
-    "name": "●●[قنوات اليمن]●●",
-    "url": ""
-  },
+
 
 
 
@@ -161,10 +151,7 @@
   },
 
 
-{
-    "name": "●●[قنوات منوعة]●●",
-    "url": ""
-  },
+
 
 {
     "name": "ناشيونال جيوغرافيك",
