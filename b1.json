@@ -161,7 +161,511 @@
 {
     "name":  "MBC 1",
     "url": "https://shls-live-ak.akamaized.net/out/v1/0965e4d7deae49179172426cbfb3bc5e/index_7.m3u8"
-  }
+  },
+
+
+
+
+{
+"name": "بي إن سبورت 1",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/56"
+},
+
+{
+"name": "بي إن سبورت 2",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/57"
+},
+
+{
+"name": "بي إن سبورت 3",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/59"
+},
+
+{
+"name": "بي إن سبورت 4",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/60"
+},
+
+{
+"name": "بي إن سبورت 5",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/93"
+},
+
+{
+"name": "بي إن سبورت 6",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/92"
+},
+
+{
+"name": "بي إن سبورت 7",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/91"
+},
+
+{
+"name": "بي إن سبورت 8",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/61"
+},
+
+{
+"name": "بي إن سبورت 9",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4035"
+},
+
+{
+"name": "بي إن سبورت 1 HD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/46"
+},
+
+{
+"name": "بي إن سبورت 2 HD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/47"
+},
+
+{
+"name": "بي إن سبورت 3 HD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/49"
+},
+
+{
+"name": "بي إن سبورت 4 HD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/50"
+},
+
+{
+"name": "بي إن سبورت 5 HD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/51"
+},
+
+{
+"name": "بي إن سبورت 6 HD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/52"
+},
+
+{
+"name": "بي إن سبورت 7 HD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/53"
+},
+
+{
+"name": "بي إن سبورت 8 HD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/54"
+},
+
+{
+"name": "بي إن سبورت 9 HD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4034"
+},
+
+{
+"name": "بي إن سبورت 1 FHD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3221"
+},
+
+{
+"name": "بي إن سبورت 2 FHD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3222"
+},
+
+{
+"name": "بي إن سبورت 3 FHD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3224"
+},
+
+{
+"name": "بي إن سبورت 4 FHD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3225"
+},
+
+{
+"name": "بي إن سبورت 5 FHD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3226"
+},
+
+{
+"name": "بي إن سبورت 6 FHD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3227"
+},
+
+{
+"name": "بي إن سبورت 7 FHD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3228"
+},
+
+{
+"name": "بي إن سبورت 8 FHD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3230"
+},
+
+{
+"name": "بي إن سبورت 9 FHD",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4033"
+},
+
+{
+"name": "بي إن سبورت 1 4K",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/459"
+},
+
+{
+"name": "بي إن سبورت 2 4K",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/450"
+},
+
+{
+"name": "بي إن سبورت 3 4K",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/451"
+},
+
+{
+"name": "بي إن سبورت 4 4K",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/453"
+},
+
+{
+"name": "بي إن سبورت 5 4K",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3875"
+},
+
+{
+"name": "بي إن سبورت 6 4K",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/455"
+},
+
+{
+"name": "بي إن سبورت 7 4K",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4002"
+},
+
+{
+"name": "بي إن سبورت 8 4K",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/457"
+},
+
+{
+"name": "بي إن سبورت 9 4K",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4003"
+},
+
+{
+"name": "بي إن سبورت إنجليزي",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3001"
+},
+
+{
+"name": "بي إن سبورت فرنسي",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3972"
+},
+
+{
+"name": "بي إن سبورت NBA",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3973"
+},
+
+{
+"name": "بي إن سبورت إكسترا",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4095"
+},
+
+{
+"name": "بي إن سبورت نيوز",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/2051"
+},
+
+{
+"name": "أبوظبي سبورت 1",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/112"
+},
+
+{
+"name": "أبوظبي سبورت 2",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/113"
+},
+
+{
+"name": "الكأس 1",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1461"
+},
+
+{
+"name": "الكأس 2",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1462"
+},
+
+{
+"name": "الكأس 3",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1463"
+},
+
+{
+"name": "الكأس 4",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1464"
+},
+
+{
+"name": "ثمانية سبورت 1",
+"url": "http://ugeen.live:8080/Ugeen_qs7ePu/BPzR6B/4119"
+},
+
+{
+"name": "ثمانية سبورت 2",
+"url": "http://ugeen.live:8080/Ugeen_qs7ePu/BPzR6B/4120"
+},
+
+{
+"name": "ثمانية سبورت 3",
+"url": "http://ugeen.live:8080/Ugeen_qs7ePu/BPzR6B/4239"
+},
+
+{
+"name": "أون تايم سبورت 1",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/507"
+},
+
+{
+"name": "أون تايم سبورت 2",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/949"
+},
+
+{
+"name": "النيل سبورت",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/496"
+},
+
+{
+"name": "دبي سبورت 1",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4038"
+},
+
+{
+"name": "دبي سبورت 2",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4093"
+},
+
+{
+"name": "السعودية سبورت 1",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/2053"
+},
+
+{
+"name": "السعودية سبورت 2",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/2054"
+},
+
+{
+"name": "الأهلي TV",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/952"
+},
+
+{
+"name": "الزمالك TV",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/2068"
+},
+
+},
+
+{
+"name": "الجزيرة",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/999"
+},
+
+{
+"name": "الجزيرة مباشر",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3208"
+},
+
+{
+"name": "الجزيرة وثائقية",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1000"
+},
+
+{
+"name": "العربية",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1001"
+},
+
+{
+"name": "الحدث",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1002"
+},
+
+{
+"name": "سكاي نيوز",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1007"
+},
+
+{
+"name": "بي بي سي",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1005"
+},
+
+{
+"name": "فرانس 24",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3213"
+},
+
+{
+"name": "روسيا اليوم",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1004"
+},
+
+{
+"name": "الحرة",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3214"
+},
+
+{
+"name": "دويتشه فيله",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3207"
+},
+
+{
+"name": "سي إن إن",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3212"
+},
+
+{
+"name": "فلسطين اليوم",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/486"
+},
+
+
+
+{
+"name": "المجد قرآن",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/957"
+},
+
+{
+"name": "المجد حديث",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/956"
+},
+
+{
+"name": "قناة القرآن",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/958"
+},
+
+{
+"name": "مصر قرآن",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/2091"
+},
+
+{
+"name": "هدى TV",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3864"
+},
+
+{
+"name": "الناس",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4368"
+},
+
+{
+"name": "السنة",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/958"
+},
+
+
+
+{
+"name": "سبيس تون",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1017"
+},
+
+{
+"name": "كرتون نتورك",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1011"
+},
+
+{
+"name": "ماجد",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1019"
+},
+
+{
+"name": "كوكي",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1015"
+},
+
+{
+"name": "مهيب",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1016"
+},
+
+{
+"name": "طيور الجنة",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/1020"
+},
+
+{
+"name": "كراميش",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4385"
+},
+
+{
+"name": "هدهد",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4386"
+},
+
+
+
+{
+"name": "المجد علوم",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3651"
+},
+
+{
+"name": "المجد أطفال",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3648"
+},
+
+{
+"name": "أبوظبي الأولى",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4360"
+},
+
+{
+"name": "أبوظبي الثانية",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/4361"
+},
+
+
+
+{
+"name": "راديو القرآن",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3289"
+},
+
+{
+"name": "راديو القاهرة",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3295"
+},
+
+{
+"name": "راديو العفاسي",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/2739"
+},
+
+{
+"name": "راديو العجمي",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/2740"
+},
+
+{
+"name": "راديو الشريم",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3292"
+},
+
+{
+"name": "راديو السديس",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3293"
+},
+
+{
+"name": "راديو المنشاوي",
+"url": "http://176.123.9.60:8080/Ugeen_qs7ePu/BPzR6B/3291"
+}
+
 
 
 
