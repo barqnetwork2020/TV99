@@ -1,400 +1,174 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>BARQ TV - منصة البث المباشر</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body,html{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BARQ TV JSON Minimal</title>
 
-        /* الحاوية الرئيسية */
-        .container {
-            width: 80%;
-            height: 80%;
-            margin: 10% auto;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(255,215,0,0.1);
-        }
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 
-        /* الفيديو */
-        #playerVideo{
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            background:#000;
-            border-radius: 20px;
-        }
+<!-- تشغيل HLS بدون تقطيع -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
 
-        /* زر القائمة */
-        #menuBtn{
-            position:fixed;
-            top:14px;
-            right:14px;
-            width:50px;
-            height:50px;
-            border-radius:12px;
-            background:rgba(255,215,0,0.15);
-            border:1px solid rgba(255,215,0,0.3);
-            color:#FFD700;
-            font-size:20px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            cursor:pointer;
-            z-index:9999;
-            transition:all 0.3s ease;
-        }
-        #menuBtn:hover{
-            background:rgba(255,215,0,0.25);
-            transform:scale(1.05);
-        }
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{width:100%;height:100%;overflow:hidden;background:#000;}
 
-        /* القائمة */
-        #panel{
-            position:fixed;
-            top:10%;
-            right:-320px;
-            width:300px;
-            height:80%;
-            background:rgba(15,15,15,0.98);
-            backdrop-filter:blur(10px);
-            padding:70px 15px 15px 15px;
-            transition:right 0.3s ease;
-            z-index:9998;
-            overflow-y:auto;
-            border-left:1px solid rgba(255,215,0,0.2);
-            border-radius: 0 20px 20px 0;
-        }
-        #panel.open{
-            right:10%;
-        }
+    #playerVideo{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        background:#000;
+    }
 
-        /* عنوان القائمة */
-        .panel-header{
-            position:fixed;
-            top:10%;
-            right:0;
-            width:300px;
-            padding:15px;
-            background:rgba(255,215,0,0.1);
-            border-bottom:1px solid rgba(255,215,0,0.2);
-            z-index:10000;
-            border-radius: 0 20px 0 0;
-        }
-        .panel-title{
-            color:#FFD700;
-            font-size:18px;
-            font-weight:bold;
-            text-align:center;
-        }
+    #menuBtn{
+        position:fixed;
+        top:14px;
+        right:14px;
+        width:50px;
+        height:50px;
+        border-radius:12px;
+        background:rgba(255,255,255,0.2);
+        border:1px solid rgba(255,255,255,0.25);
+        color:#fff;
+        font-size:20px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        z-index:9999;
+    }
 
-        /* عناصر القائمة */
-        .item{
-            padding:15px;
-            background:rgba(255,255,255,0.05);
-            margin-bottom:8px;
-            border-radius:10px;
-            color:#fff;
-            cursor:pointer;
-            transition:all 0.3s ease;
-            border:1px solid transparent;
-            display:flex;
-            align-items:center;
-            gap:12px;
-        }
-        .item:hover{
-            background:rgba(255,215,0,0.1);
-            border-color:rgba(255,215,0,0.3);
-            transform:translateX(-5px);
-        }
-        .item.active{
-            background:rgba(255,215,0,0.15);
-            border-color:#FFD700;
-        }
-        .channel-number{
-            width:30px;
-            height:30px;
-            background:rgba(255,215,0,0.2);
-            border-radius:8px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:14px;
-            color:#FFD700;
-            font-weight:bold;
-        }
-        .channel-name{
-            flex:1;
-            font-size:16px;
-        }
-        .live-badge{
-            background:#FF5252;
-            color:white;
-            padding:4px 8px;
-            border-radius:6px;
-            font-size:12px;
-            font-weight:bold;
-        }
+    #panel{
+        position:fixed;
+        top:0;
+        right:-320px;
+        width:300px;
+        height:100%;
+        background:rgba(20,20,20,0.95);
+        padding:15px;
+        transition:right .3s;
+        z-index:9998;
+        overflow-y:auto;
+    }
+    #panel.open{ right:0; }
 
-        /* شاشة الترحيب */
-        #welcomeScreen{
-            position:fixed;
-            top:10%;
-            left:10%;
-            width:80%;
-            height:80%;
-            background:linear-gradient(135deg, #0A0A0A 0%, #111 100%);
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            z-index:9997;
-            padding:20px;
-            text-align:center;
-            border-radius: 20px;
-            border: 1px solid rgba(255,215,0,0.2);
-        }
-        .welcome-icon{
-            font-size:80px;
-            color:#FFD700;
-            margin-bottom:20px;
-        }
-        .welcome-title{
-            font-size:32px;
-            color:#FFD700;
-            margin-bottom:15px;
-            font-weight:bold;
-        }
-        .welcome-text{
-            font-size:18px;
-            color:rgba(255,255,255,0.7);
-            margin-bottom:30px;
-            max-width:500px;
-            line-height:1.6;
-        }
-        .start-btn{
-            background:rgba(255,215,0,0.2);
-            border:1px solid #FFD700;
-            color:#FFD700;
-            padding:12px 30px;
-            border-radius:25px;
-            font-size:16px;
-            cursor:pointer;
-            transition:all 0.3s ease;
-            display:flex;
-            align-items:center;
-            gap:10px;
-        }
-        .start-btn:hover{
-            background:#FFD700;
-            color:#000;
-            transform:translateY(-3px);
-        }
-
-        /* حالة التحميل */
-        .loading{
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            padding:40px;
-            color:rgba(255,255,255,0.7);
-        }
-        .loading-spinner{
-            width:40px;
-            height:40px;
-            border:3px solid rgba(255,215,0,0.2);
-            border-radius:50%;
-            border-top-color:#FFD700;
-            animation:spin 1s linear infinite;
-            margin-bottom:15px;
-        }
-        @keyframes spin{
-            0%{transform:rotate(0deg);}
-            100%{transform:rotate(360deg);}
-        }
-
-        /* شريط التمرير المخصص */
-        #panel::-webkit-scrollbar{width:6px;}
-        #panel::-webkit-scrollbar-track{background:rgba(255,255,255,0.05);}
-        #panel::-webkit-scrollbar-thumb{background:rgba(255,215,0,0.3);border-radius:3px;}
-        #panel::-webkit-scrollbar-thumb:hover{background:rgba(255,215,0,0.5);}
-
-        /* تصميم متجاوب للشاشات الصغيرة */
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-                height: 85%;
-                margin: 7.5% auto;
-            }
-            
-            #panel {
-                width: 250px;
-                right: -270px;
-            }
-            
-            #panel.open {
-                right: 5%;
-            }
-            
-            .panel-header {
-                width: 250px;
-            }
-            
-            #welcomeScreen {
-                top: 7.5%;
-                left: 5%;
-                width: 90%;
-                height: 85%;
-            }
-        }
-    </style>
+    .item{
+        padding:12px;
+        background:rgba(255,255,255,0.1);
+        margin-bottom:10px;
+        border-radius:10px;
+        color:#fff;
+        cursor:pointer;
+    }
+    .item:hover{ background:rgba(255,255,255,0.2); }
+</style>
 </head>
 <body>
 
-<!-- شاشة الترحيب -->
-<div id="welcomeScreen">
-    <div class="welcome-icon">
-        <i class="fas fa-tv"></i>
-    </div>
-    <h1 class="welcome-title">BARQ TV</h1>
-    <p class="welcome-text">
-        منصة البث المباشر للقنوات التلفزيونية. اختر قناة من القائمة لبدء المشاهدة.
-    </p>
-    <button class="start-btn" onclick="hideWelcomeScreen()">
-        <i class="fas fa-play"></i>
-        بدء المشاهدة
-    </button>
-</div>
-
-<!-- زر القائمة -->
 <div id="menuBtn"><i class="fas fa-bars"></i></div>
 
-<!-- القائمة -->
-<div id="panel">
-    <div class="panel-header">
-        <div class="panel-title">القنوات المتاحة</div>
-    </div>
-    <div id="channelsList">
-        <div class="loading">
-            <div class="loading-spinner"></div>
-            <p>جاري تحميل القنوات...</p>
-        </div>
-    </div>
-</div>
+<div id="panel"></div>
 
-<!-- حاوية الفيديو -->
-<div class="container">
-    <video id="playerVideo" playsinline webkit-playsinline controls></video>
-</div>
+<video id="playerVideo" playsinline webkit-playsinline controls></video>
 
 <script>
-// رابط JSON للقنوات
-const jsonUrl = "https://raw.githubusercontent.com/barqnetwork2020/TV99/main/b1.json";
+/* ================================
+   1) رابط ملف JSON
+   ضع هنا رابط ملف الجيسون الذي كان في صفحتك السابقة
+================================ */
+const jsonURL = "channels.json"; // ← غيّره إذا رغبت
 
-// عناصر DOM
+
+/* عناصر DOM */
 const panel = document.getElementById("panel");
-const menuBtn = document.getElementById("menuBtn");
 const player = document.getElementById("playerVideo");
-const channelsList = document.getElementById("channelsList");
-const welcomeScreen = document.getElementById("welcomeScreen");
+const menuBtn = document.getElementById("menuBtn");
 
-// إخفاء شاشة الترحيب
-function hideWelcomeScreen() {
-    welcomeScreen.style.display = 'none';
-    // فتح القائمة تلقائياً بعد إخفاء شاشة الترحيب
-    panel.classList.add("open");
-}
+/* فتح/غلق القائمة */
+menuBtn.onclick = () => panel.classList.toggle("open");
 
-// فتح / إغلاق القائمة
-menuBtn.onclick = () => {
-    panel.classList.toggle("open");
-};
 
-// تحميل القنوات من JSON
-function loadChannels() {
-    fetch(jsonUrl)
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(`خطأ في الشبكة: ${res.status}`);
-            }
-            return res.json();
-        })
-        .then(data => {
-            renderChannels(data);
-        })
-        .catch(err => {
-            console.error("خطأ في تحميل القنوات:", err);
-            showError("تعذر تحميل القنوات. يرجى المحاولة لاحقاً.");
-        });
-}
+/* ================
+   تحميل ملف JSON
+================ */
+let channels = [];
 
-// عرض القنوات
-function renderChannels(channels) {
-    channelsList.innerHTML = "";
-    
-    channels.forEach((channel, index) => {
-        let div = document.createElement("div");
+fetch(jsonURL)
+    .then(r=>r.json())
+    .then(data=>{
+        channels = data;
+        buildChannelList();
+        panel.classList.add("open"); // تظهر عند بداية الصفحة
+    })
+    .catch(e=>{
+        console.error("JSON Error:", e);
+    });
+
+
+/* بناء قائمة القنوات */
+function buildChannelList(){
+    panel.innerHTML = "";
+    channels.forEach((ch, i)=>{
+        const div = document.createElement("div");
         div.className = "item";
-        div.innerHTML = `
-            <div class="channel-number">${index + 1}</div>
-            <div class="channel-name">${channel.name}</div>
-            <div class="live-badge">مباشر</div>
-        `;
-        div.onclick = () => selectChannel(channel, div);
-        channelsList.appendChild(div);
+        div.textContent = ch.name || ("قناة " + (i+1));
+        div.onclick = ()=>playChannel(ch);
+        panel.appendChild(div);
     });
 }
 
-// اختيار قناة
-function selectChannel(channel, element) {
-    // إزالة النشط من جميع العناصر
-    document.querySelectorAll('.item').forEach(el => {
-        el.classList.remove('active');
-    });
-    
-    // إضافة النشط للعنصر المحدد
-    element.classList.add('active');
-    
-    // إغلاق القائمة
+
+/* تشغيل القناة مع نظام منع التقطيع */
+function playChannel(ch){
     panel.classList.remove("open");
-    
-    // إخفاء شاشة الترحيب إذا كانت ظاهرة
-    welcomeScreen.style.display = 'none';
-    
-    // تشغيل القناة
-    player.src = channel.url;
-    player.play().catch(e => {
-        console.error("خطأ في تشغيل الفيديو:", e);
-    });
-}
 
-// عرض رسالة خطأ
-function showError(message) {
-    channelsList.innerHTML = `
-        <div style="color: #FF5252; text-align: center; padding: 20px;">
-            <i class="fas fa-exclamation-triangle" style="font-size: 40px; margin-bottom: 15px;"></i>
-            <p>${message}</p>
-            <button onclick="loadChannels()" style="background: #FFD700; color: #000; border: none; padding: 10px 20px; border-radius: 20px; margin-top: 15px; cursor: pointer;">
-                <i class="fas fa-redo"></i> إعادة المحاولة
-            </button>
-        </div>
-    `;
-}
+    const url = ch.url;
 
-// تحميل القنوات عند بدء التشغيل
-document.addEventListener('DOMContentLoaded', loadChannels);
+    // إذا كان الرابط HLS
+    if(url.endsWith(".m3u8")){
+        if(Hls.isSupported()){
+            const hls = new Hls({
+                maxLiveSyncPlaybackRate: 1.5,
+                liveSyncDurationCount: 3,
+                enableWorker: true,
+                lowLatencyMode: true
+            });
 
-// فتح القائمة تلقائياً عند تحميل الصفحة (بعد 2 ثانية)
-setTimeout(() => {
-    if (welcomeScreen.style.display !== 'none') {
-        panel.classList.add("open");
+            hls.loadSource(url);
+            hls.attachMedia(player);
+
+            hls.on(Hls.Events.ERROR, function(event, data){
+                console.warn("HLS Error:", data);
+                if(data.fatal){
+                    hls.destroy();
+                    setTimeout(()=>playChannel(ch), 2000); // إعادة محاولة
+                }
+            });
+        } else if(player.canPlayType("application/vnd.apple.mpegurl")){
+            player.src = url;
+        }
     }
-}, 2000);
+    else {
+        // MP4
+        player.src = url;
+    }
+
+    // تشغيل
+    player.play()
+        .then(()=>requestFS())
+        .catch(()=>{});
+}
+
+
+/* طلب ملء الشاشة */
+function requestFS(){
+    if(player.requestFullscreen){
+        player.requestFullscreen().catch(()=>{});
+    } else if(player.webkitEnterFullscreen){
+        player.webkitEnterFullscreen();
+    }
+}
 </script>
 
 </body>
