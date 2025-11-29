@@ -345,6 +345,50 @@
             display: block;
         }
 
+        /* عناصر التحكم المخصصة */
+        .custom-controls {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .video-wrapper:hover .custom-controls {
+            opacity: 1;
+        }
+
+        .control-btn-large {
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .control-btn-large:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
         /* حالة التحميل */
         .loading-state {
             display: flex;
@@ -470,6 +514,10 @@
             .welcome-title {
                 font-size: 28px;
             }
+            .control-btn-large {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
 
         /* تأثيرات إضافية */
@@ -554,7 +602,22 @@
 
                 <!-- مشغل الفيديو -->
                 <div class="video-wrapper" id="videoWrapper">
-                    <video id="videoPlayer" controls></video>
+                    <video id="videoPlayer"></video>
+                    <!-- عناصر التحكم المخصصة -->
+                    <div class="custom-controls">
+                        <button class="control-btn-large" onclick="toggleFullscreen()">
+                            <i class="fas fa-expand"></i>
+                            <span>ملء الشاشة</span>
+                        </button>
+                        <button class="control-btn-large" onclick="toggleMute()" id="muteBtn">
+                            <i class="fas fa-volume-up"></i>
+                            <span>كتم الصوت</span>
+                        </button>
+                        <button class="control-btn-large" onclick="togglePlayPause()" id="playPauseBtn">
+                            <i class="fas fa-play"></i>
+                            <span>تشغيل/إيقاف</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -570,6 +633,11 @@
         const channelsCountElement = document.getElementById("channelsCount");
         const welcomeScreen = document.getElementById("welcomeScreen");
         const videoWrapper = document.getElementById("videoWrapper");
+        const muteBtn = document.getElementById("muteBtn");
+        const playPauseBtn = document.getElementById("playPauseBtn");
+
+        // حالة ملء الشاشة
+        let isFullscreen = false;
 
         // تحسين سرعة التحميل - استخدام التخزين المؤقت
         let channelsCache = null;
@@ -661,10 +729,67 @@
                 playPromise.then(() => {
                     // التشغيل نجح
                     console.log(`تم تشغيل القناة: ${name}`);
+                    updatePlayPauseButton(true);
                 }).catch(error => {
                     // حدث خطأ في التشغيل
                     console.error("خطأ في تشغيل الفيديو:", error);
+                    updatePlayPauseButton(false);
                 });
+            }
+        }
+
+        // تبديل ملء الشاشة
+        function toggleFullscreen() {
+            if (!isFullscreen) {
+                // الدخول إلى وضع ملء الشاشة
+                if (videoWrapper.requestFullscreen) {
+                    videoWrapper.requestFullscreen();
+                } else if (videoWrapper.webkitRequestFullscreen) {
+                    videoWrapper.webkitRequestFullscreen();
+                } else if (videoWrapper.msRequestFullscreen) {
+                    videoWrapper.msRequestFullscreen();
+                }
+                isFullscreen = true;
+            } else {
+                // الخروج من وضع ملء الشاشة
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                isFullscreen = false;
+            }
+        }
+
+        // تبديل كتم الصوت
+        function toggleMute() {
+            videoPlayer.muted = !videoPlayer.muted;
+            if (videoPlayer.muted) {
+                muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i><span>إلغاء الكتم</span>';
+            } else {
+                muteBtn.innerHTML = '<i class="fas fa-volume-up"></i><span>كتم الصوت</span>';
+            }
+        }
+
+        // تبديل التشغيل/الإيقاف
+        function togglePlayPause() {
+            if (videoPlayer.paused) {
+                videoPlayer.play();
+                updatePlayPauseButton(true);
+            } else {
+                videoPlayer.pause();
+                updatePlayPauseButton(false);
+            }
+        }
+
+        // تحديث زر التشغيل/الإيقاف
+        function updatePlayPauseButton(isPlaying) {
+            if (isPlaying) {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i><span>إيقاف</span>';
+            } else {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i><span>تشغيل</span>';
             }
         }
 
@@ -713,12 +838,32 @@
             console.error("حدث خطأ في تشغيل الفيديو");
         });
 
+        // تحديث حالة التشغيل تلقائياً
+        videoPlayer.addEventListener('play', function() {
+            updatePlayPauseButton(true);
+        });
+
+        videoPlayer.addEventListener('pause', function() {
+            updatePlayPauseButton(false);
+        });
+
         // تحسين الأداء - إيقاف الفيديو عند الخروج من الصفحة
         document.addEventListener('visibilitychange', function() {
             if (document.hidden) {
                 videoPlayer.pause();
             }
         });
+
+        // معالجة تغيير وضع ملء الشاشة
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+        document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+        function handleFullscreenChange() {
+            isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement || 
+                             document.mozFullScreenElement || document.msFullscreenElement);
+        }
     </script>
 </body>
 </html>
